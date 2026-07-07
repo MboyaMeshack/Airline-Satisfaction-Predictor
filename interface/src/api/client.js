@@ -1,6 +1,6 @@
 const BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
-  "https://web-production-6f0c32.up.railway.app";
+  window.location.origin;
 
 /**
  * Sends raw values to the backend

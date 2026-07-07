@@ -7,6 +7,7 @@ no model logic itself -- all inference lives in `services.predictor`.
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, Request, status
@@ -43,11 +44,22 @@ logger = logging.getLogger("airline_satisfaction.api")
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 
-# Origins allowed to call this API during development. 
+# Origins allowed to call this API.
+# In production, set the ALLOWED_ORIGINS env var to a comma-separated list
+# of permitted origins (e.g. "https://your-app.up.railway.app"). Any origins
+# listed there are merged with the hardcoded development defaults below.
+_EXTRA_ORIGINS = [
+    o.strip()
+    for o in os.environ.get("ALLOWED_ORIGINS", "").split(",")
+    if o.strip()
+]
+
 ALLOWED_ORIGINS = [
-    "http://localhost:5173",  
+    "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
+    "https://web-production-e63f6.up.railway.app",
+    *_EXTRA_ORIGINS,
 ]
 
 
