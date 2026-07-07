@@ -45,9 +45,10 @@ ARTIFACTS_DIR = BASE_DIR / "artifacts"
 
 # Origins allowed to call this API during development. 
 ALLOWED_ORIGINS = [
-    "http://localhost:5173",  
+    "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
+    "https://web-production-e63f6.up.railway.app",
 ]
 
 
